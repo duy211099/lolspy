@@ -1,17 +1,22 @@
 import 'dart:convert';
 
+import 'package:lolspy/src/models/image_model.dart';
+
 class Champion {
   final String version;
   final String key;
   final String name;
   final String title;
   final String blurb;
-  Champion({
+  final Image image;
+
+  const Champion({
     required this.version,
     required this.key,
     required this.name,
     required this.title,
     required this.blurb,
+    required this.image,
   });
 
   Champion copyWith({
@@ -20,6 +25,7 @@ class Champion {
     String? name,
     String? title,
     String? blurb,
+    Image? image,
   }) {
     return Champion(
       version: version ?? this.version,
@@ -27,6 +33,7 @@ class Champion {
       name: name ?? this.name,
       title: title ?? this.title,
       blurb: blurb ?? this.blurb,
+      image: image ?? this.image,
     );
   }
 
@@ -37,6 +44,7 @@ class Champion {
       'name': name,
       'title': title,
       'blurb': blurb,
+      'image': image.toMap(),
     };
   }
 
@@ -47,6 +55,7 @@ class Champion {
       name: map['name'] ?? '',
       title: map['title'] ?? '',
       blurb: map['blurb'] ?? '',
+      image: Image.fromMap(map['image']),
     );
   }
 
@@ -57,7 +66,7 @@ class Champion {
 
   @override
   String toString() {
-    return 'Champion(version: $version, key: $key, name: $name, title: $title, blurb: $blurb)';
+    return 'Champion(version: $version, key: $key, name: $name, title: $title, blurb: $blurb, image: $image)';
   }
 
   @override
@@ -69,7 +78,8 @@ class Champion {
         other.key == key &&
         other.name == name &&
         other.title == title &&
-        other.blurb == blurb;
+        other.blurb == blurb &&
+        other.image == image;
   }
 
   @override
@@ -78,6 +88,7 @@ class Champion {
         key.hashCode ^
         name.hashCode ^
         title.hashCode ^
-        blurb.hashCode;
+        blurb.hashCode ^
+        image.hashCode;
   }
 }

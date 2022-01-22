@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lolspy/src/repositories/repositories.dart';
@@ -26,7 +27,17 @@ class HomeScreen extends StatelessWidget {
         builder: (context, state) {
           return SingleChildScrollView(
             child: Column(
-              children: state.champions.map((e) => Text(e.name)).toList(),
+              children: state.champions
+                  .map((champion) => Column(
+                        children: [
+                          Image(
+                              image: CachedNetworkImageProvider(
+                            'https://ddragon.leagueoflegends.com/cdn/12.2.1/img/champion/${champion.image.full}',
+                          )),
+                          Text(champion.name),
+                        ],
+                      ))
+                  .toList(),
             ),
           );
         },
