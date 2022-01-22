@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:lolspy/src/constants/constants.dart';
 
-import 'error_response.dart';
-
 class BaseDio {
   static final BaseDio _singleton = BaseDio._internal();
   late Dio _dio;
@@ -20,15 +18,12 @@ class BaseDio {
       CancelToken? cancelToken,
       ProgressCallback? onReceiveProgress}) async {
     final res = await _dio.get(
-      path,
+      path + 'a',
       queryParameters: querryParameter,
       options: options,
       cancelToken: cancelToken,
       onReceiveProgress: onReceiveProgress,
     );
-    if (res is! ErrorResponse) {
-      return res;
-    }
-    throw res;
+    return res;
   }
 }
