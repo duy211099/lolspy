@@ -18,7 +18,7 @@ class BaseDio {
       CancelToken? cancelToken,
       ProgressCallback? onReceiveProgress}) async {
     final res = await _dio.get(
-      path + 'a',
+      path,
       queryParameters: querryParameter,
       options: options,
       cancelToken: cancelToken,
