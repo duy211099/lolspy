@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lolspy/src/config/custom_router.dart';
+import 'package:lolspy/src/repositories/repositories.dart';
 import 'package:lolspy/src/screens/screens.dart';
 
 void main() {
@@ -11,13 +13,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: CustomRouter.onGenerateRoute,
-      initialRoute: SplashScreen.routeName,
-      theme: ThemeData(
-        fontFamily: 'AlegreyaSans',
-        scaffoldBackgroundColor: Colors.white,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<ChampionRepository>(
+          create: (context) => ChampionRepository(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: CustomRouter.onGenerateRoute,
+        initialRoute: HomeScreen.routeName,
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+        ),
       ),
     );
   }

@@ -1,3 +1,3 @@
 class Paths {
-  static const String champions = 'champions';
+  static const String champions = '/champion.json';
 }

@@ -8,6 +8,8 @@ class CustomRouter {
     switch (settings.name) {
       case SplashScreen.routeName:
         return SplashScreen.route();
+      case HomeScreen.routeName:
+        return HomeScreen.route();
       default:
         return _errorRoute();
     }
